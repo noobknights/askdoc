@@ -12,20 +12,26 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
+from dotenv import load_dotenv
+load_dotenv()
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# env config
+env_path = Path('.')/'.env'
+load_dotenv(dotenv_path=env_path)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'b4)a))tax)hi4r-3qnep@x$=p=ruhozz$dem$h*_@9n1njq@=y'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['05a9af1bc73e.ngrok.io', '127.0.0.1', 'askdoc.herokuapp.com']
+ALLOWED_HOSTS = [os.getenv('DEV_HOST'), os.getenv('PRODUCTION_HOST')]
 
 
 # Application definition
