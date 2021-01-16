@@ -1,5 +1,5 @@
 {% extends 'base.html' %} {% block content %}
-<h1 class="display-3">Health</h1>
+<h1 class="display-4">Health</h1>
 {% if success %}
 <div class="d-flex flex-column align-items-center">
 	<div class="alert alert-success alert-dismissible" style="max-width: 500px">
@@ -15,7 +15,6 @@
 	</div>
 </div>
 {% endif %}
-<br />
 <div class="d-flex flex-column justify-content align-items-center">
 	{% include 'api/form.html' %}
 </div>
