@@ -1,4 +1,4 @@
-import pickle 
+import pickle5 as pickle 
 import numpy as np
 from nltk.tokenize import word_tokenize
 from pathlib import Path
