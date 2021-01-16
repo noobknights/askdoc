@@ -85,7 +85,7 @@ pickle5==0.0.11
 pickleshare==0.7.5
 Pillow==7.0.0
 pip-upgrader==1.4.15
-powerline-status===2.8.1.dev9999-git.b-40c3e092b6c43c0192c5bbd9e2b0edfbcdd88b0c-
+powerline-status===2.7
 prometheus-client==0.8.0
 prompt-toolkit==3.0.8
 protobuf==3.6.1
