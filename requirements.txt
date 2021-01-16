@@ -34,7 +34,6 @@ idna==3.1
 ifaddr==0.1.7
 importlib-metadata==3.4.0
 ipykernel==5.4.3
-ipython==7.19.0
 ipython-genutils==0.2.0
 ipywidgets==7.6.3
 isort==5.7.0
