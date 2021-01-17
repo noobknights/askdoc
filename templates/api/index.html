@@ -1,5 +1,5 @@
 {% extends 'base.html' %} {% block content %}
-<h1 class="display-4">Health</h1>
+<h1 class="display-4 text-info">AskDoc</h1>
 {% if success %}
 <div class="d-flex flex-column align-items-center">
 	<div class="alert alert-success alert-dismissible" style="max-width: 500px">
@@ -18,7 +18,17 @@
 <div class="d-flex flex-column justify-content align-items-center">
 	{% include 'api/form.html' %}
 </div>
-{% if result %}
 <br />
-<h2 class="text-primary">{{result.0}}</h2>
-{% endif %} {% endblock %}
+
+<div style="height: 90vh">
+	{% if result %}
+	<h1 class="text-info lead" style="font-size: 30px">{{result.0}}</h1>
+
+	{% endif %}
+	<script>
+		var queryResult = JSON.parse("{{result1|escapejs}}");
+	</script>
+	{% include 'map/map.html' %}
+</div>
+
+{% endblock %}

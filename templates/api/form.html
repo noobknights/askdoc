@@ -1,13 +1,14 @@
 <form method="GET" action="results" class="w-100" style="max-width: 500px">
-	<div class="form-group mb-1">
+	<div class="input-group input-group-lg">
 		<input
 			type="text"
-			class="form-control p-3"
+			class="form-control"
 			placeholder="🔍 Search"
 			id="query"
 			name="query"
 			required
 		/>
 	</div>
-	<button type="submit" class="btn btn-primary w-100 p-3">Search</button>
+	<input type="hidden" name="clocation" id="clocation" />
+	<button type="submit" class="btn btn-lg btn-info w-100 p-3">Search</button>
 </form>
