@@ -53,11 +53,7 @@ def predict_model(document):
                     if(l.name() in word_features):
                         input_vector[symptoms_dict[l.name()]]=1
     if(1 in input_vector):
-        if(rf_clf.predict_proba([input_vector]).max()*100 > 0):
-            print({'disease':rf_clf.predict([input_vector])[0],'score':rf_clf.predict_proba([input_vector]).max()*100})
-            return {'disease':rf_clf.predict([input_vector])[0],'score':rf_clf.predict_proba([input_vector]).max()*100}
-        else:
-            return 'Enter more symptoms'
+        return {'disease':rf_clf.predict([input_vector])[0],'score':rf_clf.predict_proba([input_vector]).max()*100}
     else:
         return 'Enter valid'
 
