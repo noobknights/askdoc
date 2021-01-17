@@ -26,7 +26,11 @@
 
 	{% endif %}
 	<script>
-		var queryResult = JSON.parse("{{result1|escapejs}}");
+		try {
+			var queryResult = JSON.parse("{{result1|escapejs}}");
+		} catch {
+			queryResult = "";
+		}
 	</script>
 	{% include 'map/map.html' %}
 </div>

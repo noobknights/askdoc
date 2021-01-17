@@ -69,20 +69,25 @@ window.onload = function () {
 	handlePermission();
 }
 
+function locationSetup() {
+	cLocation = userLat + "," + userLng;
+	document.getElementById("clocation").value = cLocation;
+	boilerPlate();
+	addMarkersToMap(map, { lat: userLat, lng: userLng }, queryResult);
+}
+
 function geoFindMe(queryResult = undefined) {
 	function success(position) {
 		const lat = position.coords.latitude;
 		const lng = position.coords.longitude;
 		userLat = lat;
 		userLng = lng;
-		cLocation = userLat + "," + userLng;
-		document.getElementById("clocation").value = cLocation;
-		boilerPlate();
-		addMarkersToMap(map, { lat, lng }, queryResult);
+		locationSetup();
 	}
 
 	function error() {
 		reportLocationStatus('Unable to retrieve your location');
+		locationSetup();
 	}
 
 	if (!navigator.geolocation) {
