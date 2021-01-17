@@ -42,7 +42,7 @@
 	</script>
 	{% load static %}
 
-	<div class="d-flex flex-column text-left font-weight-bold">
+	<div class="d-flex flex-row text-left font-weight-bold m-1">
 		<div>
 			<img src="{% static 'map/home.svg' %}" />
 			Your Location
@@ -52,7 +52,6 @@
 			Near By Clinics/Hospitals
 		</div>
 	</div>
-	<br />
 	{% include 'map/map.html' %}
 </div>
 

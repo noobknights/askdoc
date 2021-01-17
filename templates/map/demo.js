@@ -12,24 +12,37 @@ let generalIcon = '<svg width="45px" height="45px" xmlns="http://www.w3.org/2000
 homeIcon = new H.map.Icon(homeIcon);
 generalIcon = new H.map.Icon(generalIcon);
 
-//user's current location
 
-function addMarkersToMap(map, userLocation, query) {
+function addInfoBubble(map, userLocation, query) {
+	var group = new H.map.Group();
+	map.addObject(group);
+
+	// add 'tap' event listener, that opens info bubble, to the group
+	group.addEventListener('tap', function (evt) {
+		// event target is the marker itself, group is a parent event target
+		// for all objects that it contains
+		var bubble = new H.ui.InfoBubble(evt.target.getGeometry(), {
+			// read custom data
+			content: evt.target.getData()
+		});
+		// show info bubble
+		ui.addBubble(bubble);
+	}, false);
+
 	var homeMarker = new H.map.Marker(userLocation, { icon: homeIcon });
-	map.addObject(homeMarker);
+	homeMarker.setData("<span class='text-danger font-weight-bold'>Home</span>");
+	group.addObject(homeMarker);
+
 	if (query) {
 		let querys = query.results.items
 		querys.forEach(e => {
 			var renderObj = new H.map.Marker({ lat: e.position[0], lng: e.position[1] }, { icon: generalIcon });
-			// ui.addBubble(new H.ui.InfoBubble({ lat: e.position[0], lng: e.position[1] }, {
-			// 	content: e.title + "\n" + e.vicinity
-			// }));
-
-			map.addObject(renderObj);
+			renderObj.setData("<p class='font-weight-bold'>" + e.title + "</p >" + e.vicinity);
+			group.addObject(renderObj);
 		});
 	}
-	console.log(query);
 }
+
 
 function boilerPlate() {
 	/**
@@ -73,7 +86,7 @@ function locationSetup() {
 	cLocation = userLat + "," + userLng;
 	document.getElementById("clocation").value = cLocation;
 	boilerPlate();
-	addMarkersToMap(map, { lat: userLat, lng: userLng }, queryResult);
+	addInfoBubble(map, { lat: userLat, lng: userLng }, queryResult);
 }
 
 function geoFindMe(queryResult = undefined) {
