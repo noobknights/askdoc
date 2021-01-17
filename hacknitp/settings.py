@@ -126,6 +126,7 @@ USE_TZ = True
 
 STATIC_URL = '/templates/'
 
-STATICFILES_DIRS = (os.path.join(BASE_DIR, 'templates'),)
-
-# STATIC_ROOT = os.path.join(BASE_DIR, 'templates')
+if os.getenv('ENV') == 'dev':
+	STATICFILES_DIRS = (os.path.join(BASE_DIR, 'templates'),)
+else:
+	STATIC_ROOT = os.path.join(BASE_DIR, 'templates')
