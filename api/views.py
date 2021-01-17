@@ -9,5 +9,10 @@ def index(request):
     
 def results(request):
     result = request.GET['query']
-    result = predict_model(result)
-    return render(request, 'api/index.html', {'result':result})
+    message = {}
+    if result == '':
+        message = {'error':'Empty Query'} 
+    else:
+        result = predict_model(result)
+        message = {'result':result}
+    return render(request, 'api/index.html', message)
