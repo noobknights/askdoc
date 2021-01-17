@@ -12,14 +12,14 @@ from nltk.tokenize import word_tokenize
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent
-RANDOM_FOREST_PATH = str(BASE_DIR)+'/randomforest.pickle'
+VOTED_CLASSIFIER_PATH = str(BASE_DIR)+'/voted_classifier.pickle'
 SYMPTOMS_DICT_PATH = str(BASE_DIR)+'/symptoms_dict.pickle'
 WORD_FEATURES_PATH = str(BASE_DIR)+'/word_features.pickle'
 
 
 
 
-rf_clf=pickle.load(open(RANDOM_FOREST_PATH,'rb'))
+rf_clf=pickle.load(open(VOTED_CLASSIFIER_PATH,'rb'))
 symptoms_dict=pickle.load(open(SYMPTOMS_DICT_PATH,'rb'))
 word_features=pickle.load(open(WORD_FEATURES_PATH,'rb'))
 
@@ -53,7 +53,8 @@ def predict_model(document):
                     if(l.name() in word_features):
                         input_vector[symptoms_dict[l.name()]]=1
     if(1 in input_vector):
-        if(rf_clf.predict_proba([input_vector]).max()*100 > 50):
+        if(rf_clf.predict_proba([input_vector]).max()*100 > 0):
+            print({'disease':rf_clf.predict([input_vector])[0],'score':rf_clf.predict_proba([input_vector]).max()*100})
             return {'disease':rf_clf.predict([input_vector])[0],'score':rf_clf.predict_proba([input_vector]).max()*100}
         else:
             return 'Enter more symptoms'
