@@ -1,26 +1,71 @@
-import pickle5 as pickle 
+#!/usr/bin/env python
+# coding: utf-8
+
+
+
+
+import pickle 
 import numpy as np
+import nltk
+from nltk.corpus import wordnet
 from nltk.tokenize import word_tokenize
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent
-
 RANDOM_FOREST_PATH = str(BASE_DIR)+'/randomforest.pickle'
 SYMPTOMS_DICT_PATH = str(BASE_DIR)+'/symptoms_dict.pickle'
 WORD_FEATURES_PATH = str(BASE_DIR)+'/word_features.pickle'
 
-load_model=pickle.load(open(RANDOM_FOREST_PATH,'rb'))
+
+
+
+rf_clf=pickle.load(open(RANDOM_FOREST_PATH,'rb'))
 symptoms_dict=pickle.load(open(SYMPTOMS_DICT_PATH,'rb'))
 word_features=pickle.load(open(WORD_FEATURES_PATH,'rb'))
 
-input_vector = np.zeros(len(symptoms_dict))
 
-def find_feature(document):
+
+def similar(word):
+    if(word in word_features):
+        return word
+    else:
+        for word_f in word_features:
+            if(word_f[:len(word)]==word):
+                return word_f    
+
+
+
+
+
+def predict_model(document):
+    input_vector = np.zeros(len(symptoms_dict))
     words=word_tokenize(document)
-    for w in words:
-        if(w in word_features):
-            input_vector[symptoms_dict[w]]=1
-    return input_vector    
+    for word in words:
+        if(word.lower() in word_features):
+            input_vector[symptoms_dict[word.lower()]]=1
+        elif(similar(word.lower()) in word_features):
+            match=similar(word.lower())
+            input_vector[symptoms_dict[match]]=1
+            
+        else:
+            for syn in wordnet.synsets(word.lower()):
+                  for l in syn.lemmas():
+                    if(l.name() in word_features):
+                        input_vector[symptoms_dict[l.name()]]=1
+    if(1 in input_vector):
+        return rf_clf.predict([input_vector])
+    else:
+        return 'Enter Valid Symptom'
 
-def predict_model(user_input):
-    return load_model.predict([find_feature(user_input)])
+
+
+
+
+
+
+
+
+
+
+
+
