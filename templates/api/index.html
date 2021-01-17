@@ -20,10 +20,18 @@
 </div>
 <br />
 
-<div style="height: 90vh">
+<div>
 	{% if result %}
-	<h1 class="text-info lead" style="font-size: 30px">{{result.0}}</h1>
-
+	<h1 class="text-info lead" style="font-size: 30px">
+		<div class="d-flex flex-column">
+			<div class="text-warning display-2">{{result.score|floatformat}}%</div>
+			<div class="text-danger">{{result.disease}}</div>
+			<br />
+			<mark style="font-size: 15px"
+				>See the below map for nearby clinics/hospitals</mark
+			>
+		</div>
+	</h1>
 	{% endif %}
 	<script>
 		try {
@@ -32,6 +40,19 @@
 			queryResult = "";
 		}
 	</script>
+	{% load static %}
+
+	<div class="d-flex flex-column text-left font-weight-bold">
+		<div>
+			<img src="{% static 'map/home.svg' %}" />
+			Your Location
+		</div>
+		<div>
+			<img src="{% static 'map/general.svg' %}" />
+			Near By Clinics/Hospitals
+		</div>
+	</div>
+	<br />
 	{% include 'map/map.html' %}
 </div>
 

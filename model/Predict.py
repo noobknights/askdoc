@@ -1,9 +1,5 @@
 #!/usr/bin/env python
 # coding: utf-8
-
-
-
-
 import pickle 
 import numpy as np
 import nltk
@@ -16,14 +12,9 @@ VOTED_CLASSIFIER_PATH = str(BASE_DIR)+'/voted_classifier.pickle'
 SYMPTOMS_DICT_PATH = str(BASE_DIR)+'/symptoms_dict.pickle'
 WORD_FEATURES_PATH = str(BASE_DIR)+'/word_features.pickle'
 
-
-
-
 rf_clf=pickle.load(open(VOTED_CLASSIFIER_PATH,'rb'))
 symptoms_dict=pickle.load(open(SYMPTOMS_DICT_PATH,'rb'))
 word_features=pickle.load(open(WORD_FEATURES_PATH,'rb'))
-
-
 
 def similar(word):
     if(word in word_features):
@@ -32,9 +23,6 @@ def similar(word):
         for word_f in word_features:
             if(word_f[:len(word)]==word):
                 return word_f    
-
-
-
 
 
 def predict_model(document):
@@ -55,7 +43,7 @@ def predict_model(document):
     if(1 in input_vector):
         return {'disease':rf_clf.predict([input_vector])[0],'score':rf_clf.predict_proba([input_vector]).max()*100}
     else:
-        return 'Enter valid'
+        return -1
 
 
 def predict_button(buttons):

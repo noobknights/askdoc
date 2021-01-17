@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.contrib import messages
-from model.Predict import predict_model
+from model.Predict import predict_model, predict_button
 from json import dumps
 import requests
 import os
@@ -23,7 +23,10 @@ def results(request):
     if result == '':
         message = {'error':'Empty Query'} 
     else:
-        result = predict_model(result)
+        if request.GET['isquery'] == 'true':
+            result = predict_button(result)
+        else:
+        	result = predict_model(result)
         message = {'result':result, 'result1':dumps(docs)}
     return render(request, 'api/index.html', message)
 
