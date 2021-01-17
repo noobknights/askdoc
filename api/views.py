@@ -28,7 +28,7 @@ def results(request):
     return render(request, 'api/index.html', message)
 
 def get_docs(location):
-    url = "https://places.ls.hereapi.com/places/v1/browse?in="+location+";r=10000&apiKey="+os.getenv('MAP_API_KEY')+"&cat=hospital"
+    url = "https://places.ls.hereapi.com/places/v1/browse?in="+str(location)+";r=10000&apiKey="+os.getenv('MAP_API_KEY')+"&cat=hospital"
     response = requests.request("GET", url, headers={}, data={})
     return response.json()
     
