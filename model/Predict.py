@@ -62,7 +62,12 @@ def predict_model(document):
         return 'Enter valid'
 
 
-
+def predict_button(buttons):
+    input_vector=np.zeros(len(symptoms_dict))
+    buttons=buttons.split(' ')
+    for button in buttons:
+        input_vector[symptoms_dict[button]]=1
+    return {'disease':rf_clf.predict([input_vector])[0],'score':rf_clf.predict_proba([input_vector]).max()*100}
 
 
 
