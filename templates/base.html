@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link
+			rel="stylesheet"
+			href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+		/>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+		<link
+			rel="stylesheet"
+			href="https://js.api.here.com/v3/3.1/mapsjs-ui.css"
+		/>
+		{% load static %}
+		<link rel="icon" href="{% static 'map/logo.ico' %}" />
+		<link rel="stylesheet" href="{% static 'map/demo.css' %}" />
+		<link rel="stylesheet" href="{% static 'map/template.css' %}" />
+		<script src="{% static 'map/test-credentials.js' %}"></script>
+		<script src="https://js.api.here.com/v3/3.1/mapsjs-core.js"></script>
+		<script src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
+		<script src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
+		<script src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
+		<title>AskDoc</title>
+	</head>
+	<body>
+		{% load static %} {% include 'api/nav.html' %}
+		<div class="container-fluid">
+			<div class="text-center">{% block content %} {% endblock %}</div>
+		</div>
+		{% include 'api/footer.html' %}
+	</body>
+</html>

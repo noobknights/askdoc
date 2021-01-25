@@ -1,0 +1,71 @@
+{% extends 'base.html' %} {% block content %} {% if success %}
+<div class="d-flex flex-column align-items-center">
+	<div class="alert alert-success alert-dismissible" style="max-width: 500px">
+		<button type="button" class="close" data-dismiss="alert">&times;</button>
+		<strong>{{success}}</strong>
+	</div>
+</div>
+{% elif error %}
+<div class="d-flex flex-column align-items-center">
+	<div class="alert alert-danger alert-dismissible" style="max-width: 500px">
+		<button type="button" class="close" data-dismiss="alert">&times;</button>
+		<strong>{{error}}</strong>
+	</div>
+</div>
+{% endif %}
+<div
+	class="d-flex flex-column justify-content-center align-items-center"
+	style="min-height: 95vh"
+>
+	{% load static %}
+	<img src="{% static 'map/logo256.png' %}" />
+	<br /><br />
+	{% include 'api/form.html' %}
+</div>
+<hr />
+<div>
+	{% if result %}
+	<h1 class="text-info lead" style="font-size: 30px">
+		<div class="d-flex flex-column align-items-center">
+			<div
+				style="width: 240px; height: 240px; border-width: 4px !important"
+				class="border border-warning rounded-circle text-warning display-3 float-left d-flex justify-content-center align-items-center"
+			>
+				<span class="p-2"> {{result.score|floatformat}}% </span>
+			</div>
+			<div
+				class="w-100 justify-content-center text-danger mt-3 float-right d-flex align-items-center"
+			>
+				<img style="max-width: 100px" src="{% static 'disease.svg' %}" alt="" />
+				<span class="font-weight-bolder">{{result.disease}}</span>
+			</div>
+			<br />
+			<mark style="font-size: 15px"
+				>See the below map for nearby clinics/hospitals</mark
+			>
+		</div>
+	</h1>
+	{% endif %}
+	<script>
+		try {
+			var queryResult = JSON.parse("{{result1|escapejs}}");
+		} catch {
+			queryResult = "";
+		}
+	</script>
+	<div
+		class="d-flex flex-row text-left font-weight-bold m-1 align-items-center"
+	>
+		<div>
+			<img height="40" src="{% static 'map/home.svg' %}" />
+			Your Location
+		</div>
+		<div>
+			<img height="50" src="{% static 'map/general.svg' %}" />
+			Near By Clinics/Hospitals
+		</div>
+	</div>
+	{% include 'map/map.html' %}
+</div>
+
+{% endblock %}
