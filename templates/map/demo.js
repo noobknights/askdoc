@@ -79,18 +79,10 @@ function boilerPlate() {
 window.onload = function () {
 	geoFindMe();
 
-	if (queryResult) {
-		var WH = $(window).height();
-		var SH = $("body").prop("scrollHeight");
-		$("html, body")
-			.stop()
-			.animate({ scrollTop: SH - WH }, 800, 'swing');
-	}
-	else {
-		$("html, body")
-			.stop()
-			.animate({ scrollTop: 0 }, 800, 'swing');
-	}
+	setTimeout(function () {
+		if (queryResult)
+			document.getElementById("result_area").scrollIntoView({ behavior: "smooth" });
+	}, 500);
 
 	handlePermission();
 }
@@ -124,10 +116,11 @@ function geoFindMe() {
 
 	if (!navigator.geolocation) {
 		reportLocationStatus('Geolocation is not supported by your browser');
+		return 0;
 	} else {
 		reportLocationStatus('Locating…');
 		navigator.geolocation.getCurrentPosition(success, error, options);
-		return true;
+		return 1;
 	}
 }
 
