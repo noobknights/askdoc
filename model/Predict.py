@@ -6,6 +6,7 @@ import nltk
 from nltk.corpus import wordnet
 from nltk.tokenize import word_tokenize
 from pathlib import Path
+from textblob import TextBlob
 
 BASE_DIR = Path(__file__).resolve().parent
 VOTED_CLASSIFIER_PATH = str(BASE_DIR)+'/voted_classifier.pickle'
@@ -20,13 +21,17 @@ def similar(word):
     if(word in word_features):
         return word
     else:
-        for word_f in word_features:
-            if(word_f[:len(word)]==word):
-                return word_f    
+        if(len(word)<4):
+            return word
+        else:
+            for word_f in word_features:
+                if(word_f[:len(word)]==word):
+                    return word_f    
 
 
 def predict_model(document):
     input_vector = np.zeros(len(symptoms_dict))
+    document=(str(TextBlob(document).correct()))
     words=word_tokenize(document)
     for word in words:
         if(word.lower() in word_features):
