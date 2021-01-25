@@ -1,6 +1,6 @@
 # AskDoc
 
-![image_ub](https://raw.githubusercontent.com/noobknights/askdoc/ml-ai/images/askdoc.JPG)
+![image_ub](https://github.com/noobknights/askdoc/blob/main/images/askdoc.JPG)
 
 A website which based on symptoms entered by user gives the **probable disease** he/she may have and recommends nearby hospitals/clinics (within 10 KM).
 
