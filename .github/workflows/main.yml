@@ -3,10 +3,10 @@ name: Deploy
 on:
   push:
     branches:
-      - main # Changing the branch here would also work
+      - m # Changing the branch here would also work
   pull_request:
     branches:
-      - main
+      - ma
 
 jobs:
   build:
