@@ -89,7 +89,7 @@ window.onload = function () {
 
 function locationSetup() {
 	cLocation = userLat + "," + userLng;
-	document.getElementById("clocation").value = cLocation;
+	document.getElementById("clocation").value = "22.102969,82.173886";
 	boilerPlate();
 	addInfoBubble(map, { lat: userLat, lng: userLng }, queryResult);
 }
